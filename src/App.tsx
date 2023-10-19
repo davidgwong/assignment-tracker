@@ -6,6 +6,7 @@ type AssignmentProp = {
   id: number;
   description: string;
   isCompleted: boolean;
+  dueDate: Date | undefined;
 };
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   return (
     <>
       <Header assignments={assignments} setAssignments={setAssignments} />
+
       <Assignments
         assignments={assignments}
         setAssignments={setAssignments}

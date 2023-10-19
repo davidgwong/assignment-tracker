@@ -5,11 +5,12 @@ type AssignmentProp = {
   id: number;
   description: string;
   isCompleted: boolean;
+  dueDate: Date | undefined;
 };
 
 type Props = {
   assignments: AssignmentProp[];
-  setAssignments: (value: AssignmentProp[]) => void;
+  setAssignments: React.Dispatch<React.SetStateAction<AssignmentProp[]>>;
   assignmentLength: number;
   numOfCompleted: () => number;
 };

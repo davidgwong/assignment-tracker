@@ -1,0 +1,45 @@
+.daypicker {
+  background-color: #4d4d4d;
+  font-weight: 400 !important;
+  border-radius: 15px;
+}
+
+.daypicker button {
+  background: none;
+  border-radius: 50%;
+}
+
+.daypicker button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: #8284fa;
+  border-radius: 50%;
+}
+
+.selected:not([disabled]) {
+  font-weight: bold;
+  border: 2px solid currentColor;
+}
+
+.selected:hover:not([disabled]) {
+  border-color: white;
+  color: white;
+}
+
+.today {
+  font-style: italic !important;
+  color: orangered !important;
+}
+
+.button {
+  height: 25px !important;
+  width: 100px;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+.input {
+  height: 25px !important;
+  width: 100px;
+  margin-bottom: 4px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}

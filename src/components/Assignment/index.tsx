@@ -6,13 +6,14 @@ type AssignmentProp = {
   id: number;
   description: string;
   isCompleted: boolean;
+  dueDate: Date | undefined;
 };
 
 type Props = {
   assignment: AssignmentProp;
   key: number;
   assignments: AssignmentProp[];
-  setAssignments: (value: AssignmentProp[]) => void;
+  setAssignments: React.Dispatch<React.SetStateAction<AssignmentProp[]>>;
 };
 
 export function Assignment(props: Props) {
@@ -36,6 +37,35 @@ export function Assignment(props: Props) {
     );
   };
 
+  const dateToday = new Date();
+
+  const dateDiff = () => {
+    if (props.assignment.dueDate != undefined) {
+      return Math.ceil(
+        (props.assignment.dueDate.getTime() - dateToday.getTime()) /
+          (1000 * 60 * 60 * 24)
+      );
+    } else return 0;
+  };
+
+  const isDueUrgent = () => {
+    if (dateDiff() <= 1) return true;
+    else return false;
+  };
+
+  const dueDateDisplay = () => {
+    if (dateDiff() == 1) return "Tomorrow";
+    else if (dateDiff() == 0) return "Today";
+    else if (dateDiff() == -1) return "Yesterday";
+    else if (dateDiff() < -1) {
+      return -dateDiff() + " days ago";
+    } else if (dateDiff() > 1) {
+      return dateDiff() + " days";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div className={styles.assignment}>
       <button className={styles.checkContainer} onClick={setCompleted}>
@@ -49,6 +79,12 @@ export function Assignment(props: Props) {
       >
         {props.assignment.description}
       </p>
+
+      {!props.assignment.isCompleted && (
+        <p className={isDueUrgent() ? styles.dueUrgent : styles.dueDate}>
+          Due: {dueDateDisplay()}
+        </p>
+      )}
 
       <button className={styles.deleteButton} onClick={deleteAssignment}>
         <TbTrash size={20} />
